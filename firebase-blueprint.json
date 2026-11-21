@@ -1,0 +1,274 @@
+{
+  "entities": {
+    "CatalogItem": {
+      "title": "CatalogItem",
+      "description": "A published game or application available in the Karizma Game store.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Primary (English) name of the game or application (1-100 chars)."
+        },
+        "titleAr": {
+          "type": "string",
+          "description": "Optional Arabic localized name of the game or application (0-100 chars)."
+        },
+        "itemType": {
+          "type": "string",
+          "enum": ["GAME", "APP"],
+          "description": "Distinguishes between a Game and an Application."
+        },
+        "category": {
+          "type": "string",
+          "description": "Store category identifier (e.g. ACTION, RACING, RPG, STRATEGY, TOOLS, MEDIA, PRODUCTIVITY, SECURITY, SOCIAL)."
+        },
+        "developer": {
+          "type": "string",
+          "description": "Developer or studio name (1-80 chars)."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Short English tagline or summary (1-240 chars)."
+        },
+        "summaryAr": {
+          "type": "string",
+          "description": "Optional Arabic tagline or summary (0-240 chars)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Full English description of features and release notes (1-3000 chars)."
+        },
+        "descriptionAr": {
+          "type": "string",
+          "description": "Optional Arabic description (0-3000 chars)."
+        },
+        "version": {
+          "type": "string",
+          "description": "Semantic version label such as 2.4.1 (1-32 chars)."
+        },
+        "fileSize": {
+          "type": "string",
+          "description": "Formatted package size label such as 148 MB or 1.4 GB (1-32 chars)."
+        },
+        "downloadUrl": {
+          "type": "string",
+          "description": "Actual HTTP/HTTPS download link opened when tapping Download (8-500 chars)."
+        },
+        "coverImageUrl": {
+          "type": "string",
+          "description": "Cover artwork URI (preset key, https URL, or compressed data URI up to 250000 chars)."
+        },
+        "screenshotUrls": {
+          "type": "array",
+          "description": "Bounded list (max 5) of screenshot image URIs."
+        },
+        "rating": {
+          "type": "number",
+          "description": "Store rating between 0.0 and 5.0."
+        },
+        "downloadsCount": {
+          "type": "integer",
+          "description": "Total recorded download taps (>= 0)."
+        },
+        "featured": {
+          "type": "boolean",
+          "description": "Whether the item appears in the featured hero carousel on Home."
+        },
+        "published": {
+          "type": "boolean",
+          "description": "Whether the item is live and visible in the store catalog."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "UID of the administrator who created this catalog item."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp written with FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp updated with FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "title",
+        "itemType",
+        "category",
+        "developer",
+        "summary",
+        "description",
+        "version",
+        "fileSize",
+        "downloadUrl",
+        "coverImageUrl",
+        "screenshotUrls",
+        "rating",
+        "downloadsCount",
+        "featured",
+        "published",
+        "createdBy",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Registry document granting store administrator privileges to a specific Firebase UID.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Administrator Google email address."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin"],
+          "description": "Static admin role identifier."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp written with FieldValue.serverTimestamp()."
+        }
+      },
+      "required": ["email", "role", "createdAt"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Private user profile and language preference for an authenticated Karizma Game member.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID matching the document ID."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name (1-80 chars)."
+        },
+        "email": {
+          "type": "string",
+          "description": "User email address (0-120 chars)."
+        },
+        "photoUrl": {
+          "type": "string",
+          "description": "User avatar URL (0-500 chars)."
+        },
+        "preferredLanguage": {
+          "type": "string",
+          "enum": ["en", "ar"],
+          "description": "Preferred UI language code (en or ar)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp written with FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp updated with FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "userId",
+        "displayName",
+        "preferredLanguage",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "FavoriteEntry": {
+      "title": "FavoriteEntry",
+      "description": "A catalog item bookmarked by a user.",
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string",
+          "description": "ID of the referenced CatalogItem."
+        },
+        "itemTitle": {
+          "type": "string",
+          "description": "Cached item title (1-100 chars)."
+        },
+        "itemType": {
+          "type": "string",
+          "enum": ["GAME", "APP"],
+          "description": "Item type."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp written with FieldValue.serverTimestamp()."
+        }
+      },
+      "required": ["itemId", "itemTitle", "itemType", "createdAt"]
+    },
+    "DownloadLog": {
+      "title": "DownloadLog",
+      "description": "History entry recording when a user launched a game or app download link.",
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string",
+          "description": "ID of the referenced CatalogItem."
+        },
+        "itemTitle": {
+          "type": "string",
+          "description": "Title of the downloaded item (1-100 chars)."
+        },
+        "itemType": {
+          "type": "string",
+          "enum": ["GAME", "APP"],
+          "description": "Item type."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version downloaded (1-32 chars)."
+        },
+        "downloadUrl": {
+          "type": "string",
+          "description": "Download link opened (8-500 chars)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp written with FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "itemId",
+        "itemTitle",
+        "itemType",
+        "version",
+        "downloadUrl",
+        "createdAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/catalog_items/{itemId}": {
+      "schema": { "$ref": "#/entities/CatalogItem" },
+      "description": "Dynamic store catalog of games and applications managed by administrators."
+    },
+    "/admins/{adminUid}": {
+      "schema": { "$ref": "#/entities/AdminRecord" },
+      "description": "Authorized store administrators."
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Owner-isolated user profile documents."
+    },
+    "/users/{userId}/favorites/{itemId}": {
+      "schema": { "$ref": "#/entities/FavoriteEntry" },
+      "description": "Owner-isolated favorite games and applications."
+    },
+    "/users/{userId}/downloads/{downloadId}": {
+      "schema": { "$ref": "#/entities/DownloadLog" },
+      "description": "Owner-isolated download history records."
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Karizma Game",
+  "description": "A futuristic Android gaming and applications store with bilingual Arabic/English RTL support, user profiles, favorites, and an admin publishing dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
